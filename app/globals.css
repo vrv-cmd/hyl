@@ -5,7 +5,7 @@
   --accent: #eff561;
   --rule: #575757;
 
-  --type-size: 17px;
+  --type-size: 14px;
   --type-line: 20px;
   --type-tracking: 0.1em;
 
@@ -64,7 +64,7 @@ a {
 
 @media (max-width: 900px) {
   :root {
-    --type-size: 12px;
+    --type-size: 13px;
     --type-line: 16px;
   }
 }
