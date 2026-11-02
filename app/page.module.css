@@ -1,0 +1,281 @@
+/* Layout follows the 2560 × 1440 Figma frame "Heyula Under Cons". */
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  /* Figma: linear, top #424242 → #161616 reached at ~116% of the height */
+  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg) 116.3%);
+  overflow-x: hidden;
+}
+
+/* ───────── Nav ───────── */
+
+.nav {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 50px;
+  padding: 16px 32px 14px 28px;
+}
+
+/* 0.5px bottom rule that draws in from the left */
+.nav::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  border-top: 0.5px solid var(--rule);
+  transform-origin: left center;
+  animation: draw-rule 1.4s var(--ease-in-out) both;
+}
+
+.navRight {
+  display: flex;
+  gap: 60px;
+}
+
+.navItem {
+  display: block;
+  white-space: nowrap;
+  animation: drop-in 0.9s var(--ease-out) both;
+}
+
+.date {
+  animation-delay: 0.25s;
+}
+.time {
+  font-variant-numeric: tabular-nums;
+  animation-delay: 0.4s;
+}
+.location {
+  animation-delay: 0.55s;
+}
+
+/* ───────── Main ───────── */
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+}
+
+/* Yellow "[ … ]" construction notice */
+.notice {
+  display: flex;
+  align-items: stretch;
+  max-width: 100%;
+  margin-top: 72px;
+  color: var(--accent);
+}
+
+.bracket {
+  flex: none;
+  width: 26px;
+  height: auto;
+  min-height: 76px;
+  animation: bracket-in 0.9s var(--ease-out) 0.8s both;
+}
+.bracketLeft {
+  --from: -18px;
+}
+.bracketRight {
+  --from: 18px;
+  transform: rotate(180deg);
+  animation-name: bracket-in-flipped;
+}
+
+.noticeText {
+  align-self: center;
+  padding: 28px 38px;
+  text-align: center;
+  /* types itself out, one character per step */
+  animation: type-on 1.3s steps(45, end) 1.25s both;
+}
+
+/* Logo + tagline */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  /* Figma: logo top sits at 536 / 1440 of the frame height */
+  margin-top: max(56px, calc(37.22svh - 198px));
+}
+
+.logo {
+  /* Figma frame 447 × 148. No transform/opacity/filter here: the image must
+     blend with the page background, so this box can't create a stacking context. */
+  width: min(447px, 75vw);
+  aspect-ratio: 447 / 148;
+  overflow: hidden;
+}
+
+.logoImage {
+  display: block;
+  /* Figma crops the source to its left 96.18% (hides a stray edge on the PNG) */
+  width: 103.973%;
+  height: 100%;
+  max-width: none;
+  mix-blend-mode: exclusion;
+  animation: logo-in 1.6s var(--ease-out) 1.9s both;
+}
+
+.tagline {
+  padding-left: var(--type-tracking); /* balance trailing letter-spacing */
+  text-align: center;
+  animation: rise-in 1s var(--ease-out) 2.7s both;
+}
+
+/* ───────── Footer ───────── */
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+  padding: 56px 29px 32px;
+}
+
+.contact {
+  position: relative;
+  animation: rise-in 1s var(--ease-out) 3.1s both;
+  transition: color 0.3s var(--ease-out);
+}
+
+.contact::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: var(--type-tracking);
+  bottom: -4px;
+  border-top: 1px solid currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.contact:hover,
+.contact:focus-visible {
+  color: var(--accent);
+}
+
+.contact:hover::after,
+.contact:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* ───────── Keyframes ───────── */
+
+@keyframes draw-rule {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes drop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes bracket-in {
+  from {
+    opacity: 0;
+    transform: translateX(var(--from));
+  }
+}
+
+@keyframes bracket-in-flipped {
+  from {
+    opacity: 0;
+    transform: translateX(var(--from)) rotate(180deg);
+  }
+}
+
+@keyframes type-on {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes logo-in {
+  from {
+    opacity: 0;
+    filter: blur(14px);
+    transform: scale(1.06);
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+/* ───────── Responsive ───────── */
+
+@media (max-width: 900px) {
+  .navRight {
+    gap: 32px;
+  }
+  .noticeText {
+    padding: 22px 24px;
+  }
+  .bracket {
+    width: 18px;
+    min-height: 60px;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav {
+    flex-direction: column;
+    gap: 6px;
+    padding: 14px 20px 12px;
+  }
+  .navRight {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .notice {
+    margin-top: 48px;
+  }
+  .noticeText {
+    padding: 16px 14px;
+    /* wraps to two lines here, so reveal with a fade instead of typing */
+    animation: rise-in 1s var(--ease-out) 1.25s both;
+  }
+  .bracket {
+    width: 12px;
+    min-height: 48px;
+  }
+  .hero {
+    margin-top: max(64px, calc(30svh - 150px));
+  }
+  .footer {
+    justify-content: center;
+    padding: 48px 20px 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav::after,
+  .navItem,
+  .bracket,
+  .noticeText,
+  .logoImage,
+  .tagline,
+  .contact {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+  }
+}
