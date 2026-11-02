@@ -64,7 +64,7 @@ a {
 
 @media (max-width: 900px) {
   :root {
-    --type-size: 13px;
+    --type-size: 12px;
     --type-line: 16px;
   }
 }
