@@ -18,7 +18,7 @@ export const site = {
   name: "HEYULA",
   url: resolveSiteUrl(),
   tagline: "Strange comics. Carefully made.",
-  title: "HEYULA — Strange comics. Carefully made.",
+  title: "Heyula Comics",
   description:
     "HEYULA is an independent comics publisher from İzmir, Turkey. Heyula presents translated comics in Turkish across science fiction, fantasy, horror and myth.",
   genres: ["Science fiction", "Fantasy", "Horror", "Myth"],
