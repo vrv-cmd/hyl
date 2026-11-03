@@ -1,15 +1,5 @@
-# HEYULA
+# HYL
 
-Landing page for [heyula.co](https://heyula.co) — *strange comics, carefully made.*
-Next.js 16 (App Router), fully static, built from the Figma file `HEYULA.fig`.
-
-## Develop
-
-```bash
-npm install
-npm run dev     # http://localhost:3000
-npm run build   # production build check
-```
 
 ## Where things live
 
